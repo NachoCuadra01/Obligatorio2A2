@@ -5,6 +5,14 @@
 
 using namespace std;
 
+int cantRemontadas(int* puestos){
+    int cant = 0;
+
+
+    return cant; 
+}
+
+
 int main()
 {
     // TODO
