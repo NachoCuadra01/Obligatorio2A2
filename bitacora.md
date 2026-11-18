@@ -13,6 +13,5 @@
 - Ejemplo: Leí la letra del ejercicio 6. Primera idea: ... pero la restricción de
   complejidad pide ..., así que ...
 
-## AAAA-MM-DD — En conjunto
-- Ejemplo: Implementamos ... Bug: ... Lo corregimos ...
-- Pasan los casos de prueba 1 a 4 del ejercicio 6.
+## 2026-11-13 — En conjunto
+- Empezamos el obligatorio creando el repositorio y leyendo el primer ejercicio. Pudimos terminar el 6 
