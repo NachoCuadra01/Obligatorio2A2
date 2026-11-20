@@ -17,7 +17,17 @@
   En este ejercicio simplemente se crea un array de largo N, y se van colocando los elementos con sus pares en las "antípodas", como ya se detalló anteriormente.
 
 ## Ejercicio 7
-- Sin restricciones de órdenes. / Justificación: ...
+- **cantRemontadas — Orden temporal:** O(NlogN) pc, siendo N la cantidad de corredores.
+
+  **Justificación:** se utiliza divide and conquer para resolver el problema, en la cual se divide el array de puestos y, al combinar las dos mitades, se cuentan las remontadas antes de dejarlas ordenadas. Para esto se recorre la mitad izquierda y luego sobre la mitad derecha, donde se buscan todos los puestos que cumplan la condición de remontada. Como ambas mitades están ordenadas, el array de la derecha avanza una sola vez por combinación y no vuelve para atrás, por lo que si no se cumple la remontada en una posición de la derecha, se deja de recorrer y se pasa la siguiente posición a revisar.
+
+  El array parte con los puestos originales y se divide hasta llegar a subarrays de un elemento, haciendo que quede O(log N). En cada nivel se realiza una recorrida de O(N) para contar las parejas y otra para combinar y ordenar los elementos, que hace que quede O(2N) ~ O(N). Como resultado final esto da O(NlogN) en el peor caso.
+
+REVISAR
+
+- **cantRemontadas — Orden espacial:** O(N)
+
+  En este ejercicio se crea un array auxiliar de largo N para ir combinando las mitades y ordenando los puestos, por lo que el orden espacial queda O(N). 
 
 ## Ejercicio 8
 - Sin restricciones de órdenes. / Justificación: ...
