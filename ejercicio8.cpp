@@ -5,10 +5,6 @@
 
 using namespace std;
 
-void destruir(int ****** superMatriz){
-    //AGREGAR
-}
-
 int maxSatisfaccion(int n, int W, int l0, int l1, int l2, int l3, int* peso, int* sat, int* cat){
     int A = l0 + 1;
     int B = l1 + 1;
@@ -72,9 +68,32 @@ int maxSatisfaccion(int n, int W, int l0, int l1, int l2, int l3, int* peso, int
 
 
 
-int main()
-{
-    // TODO
-    return 0;
+int main(){
+    int n;
+    int w;
+    cin >> n >> w;
+    
+    int l0;
+    int l1;
+    int l2;
+    int l3;
+    cin >> l0 >> l1 >> l2 >> l3;
+
+    int* peso = new int[n];
+    int* sat = new int[n];
+    int* cat = new int[n];
+
+    for (int i = 0; i <= n; i++){
+        cin >> peso[i] >> sat[i] >> cat[i];
+    }
+
+    int resultado = maxSatisfaccion(n, w, l0, l1, l2, l3, peso, sat, cat);
+
+    cout << resultado;
+    delete[] peso;
+    delete[] sat;
+    delete[] cat;
+
+    return 0; 
 }
 
