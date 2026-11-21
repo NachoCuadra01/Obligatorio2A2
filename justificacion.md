@@ -17,20 +17,31 @@
   En este ejercicio simplemente se crea un array de largo N, y se van colocando los elementos con sus pares en las "antípodas", como ya se detalló anteriormente.
 
 ## Ejercicio 7
+
 - **cantRemontadas — Orden temporal:** O(NlogN) pc, siendo N la cantidad de corredores.
 
-  **Justificación:** se utiliza divide and conquer para resolver el problema, en la cual se divide el array de puestos y, al combinar las dos mitades, se cuentan las remontadas antes de dejarlas ordenadas. Para esto se recorre la mitad izquierda y luego sobre la mitad derecha, donde se buscan todos los puestos que cumplan la condición de remontada. Como ambas mitades están ordenadas, el array de la derecha avanza una sola vez por combinación y no vuelve para atrás, por lo que si no se cumple la remontada en una posición de la derecha, se deja de recorrer y se pasa la siguiente posición a revisar.
+  **Justificación:** se utiliza divide and conquer para resolver el problema recursivamente, en la cual se divide el array de puestos y, al combinar las dos mitades, se cuentan las remontadas antes de dejarlas ordenadas. Para esto se recorre la mitad izquierda y luego sobre la mitad derecha, donde se buscan todos los puestos que cumplan la condición de remontada. Como ambas mitades están ordenadas, el array de la derecha avanza una sola vez por combinación y no vuelve para atrás, es decir, j avanza solamente mientras puestos[i] > 2 * puestos[j]; como j no retrocede, cada elemento derecho se visita a lo sumo una vez.
 
   El array parte con los puestos originales y se divide hasta llegar a subarrays de un elemento, haciendo que quede O(log N). En cada nivel se realiza una recorrida de O(N) para contar las parejas y otra para combinar y ordenar los elementos, que hace que quede O(2N) ~ O(N). Como resultado final esto da O(NlogN) en el peor caso.
-
-REVISAR
 
 - **cantRemontadas — Orden espacial:** O(N)
 
   En este ejercicio se crea un array auxiliar de largo N para ir combinando las mitades y ordenando los puestos, por lo que el orden espacial queda O(N). 
 
 ## Ejercicio 8
-- Sin restricciones de órdenes. / Justificación: ...
+
+## Ejercicio 8
+- **maxSatisfaccion — Orden temporal:** O(N ⋅ W ⋅ L0 ⋅ L1 ⋅ L2 ⋅ L3) pc, siendo N la cantidad de productos y W el peso máximo.
+
+  **Justificación:** se utiliza programación dinámica con tabulación, en la cual se crea un array que guarda el resultado para cada producto, peso y cantidad de productos de cada categoría. Cada posición dp[i][w][a][b][c][d] representa la máxima satisfacción que se puede lograr usando solo los primeros i productos, con un peso total de a lo sumo w y con a lo sumo a achuras, b cortes principales, c bebidas y d vegetales. Por más que es un único array, se accede como si fuera una tabla de seis dimensiones calculando el índice con el tamaño de cada dimensión.
+
+  La tabla se llena de a capas, específicamente una por producto. Para cada producto se recorren todos los pesos de 0 a W y todas las cantidades de 0 a L0, L1, L2 y L3, es decir (W+1) ⋅ (L0+1) ⋅ (L1+1) ⋅ (L2+1) ⋅ (L3+1) estados. En cada estado solo hay dos opciones: no comprar el producto, copiando el valor de la capa anterior; o comprarlo (si entra en el peso y queda lugar en su categoría), sumando su satisfacción al valor de la capa anterior con el peso y el hueco de su categoría reducidos. Como solo se revisa la categoría del producto actual, cada estado se resuelve en tiempo constante.
+
+  Al repetir esto para los N productos, el orden temporal queda O(N ⋅ W ⋅ L0 ⋅ L1 ⋅ L2 ⋅ L3) en el peor caso. Esto se ve fácilmente en el código con sus 6 for de corrido. La respuesta final se lee en la posición dp[N][W][L0][L1][L2][L3].
+
+- **maxSatisfaccion — Orden espacial:** O(N ⋅ W ⋅ L0 ⋅ L1 ⋅ L2 ⋅ L3)
+
+  En este ejercicio se crea un array de programación dinámica que guarda los resultados de todos los productos, pesos y cantidades posibles de cada categoría. Su tamaño es (N + 1) ⋅ (W + 1) ⋅ (L0 + 1) ⋅ (L1 + 1) ⋅ (L2 + 1) ⋅ (L3 + 1), por lo que el orden espacial queda en O(N ⋅ W ⋅ L0 ⋅ L1 ⋅ L2 ⋅ L3). Además, se crean tres arrays de largo N para guardar el peso, la satisfacción y la categoría de cada producto pero que no cambian el orden final.
 
 ## Ejercicio 9
 - Sin restricciones de órdenes. / Justificación: ...
