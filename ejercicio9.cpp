@@ -5,7 +5,6 @@
 
 using namespace std;
 
-//FLOOR ACLARAR QUE LO DIO GPT
 int memo[1001][1002][2];
 
 int maxLikesMemo(int k, int ronda, int dif, int prev, int* pateadores, int* likes){
@@ -17,7 +16,7 @@ int maxLikesMemo(int k, int ronda, int dif, int prev, int* pateadores, int* like
 
     if(d1 - 1 >= 0){
         int ganancia = likes[ronda];
-        if(prev == 1) ganancia = floor(likes[ronda] / 2);
+        if(prev == 1) ganancia = (likes[ronda] / 2);
         int bailo = ganancia + maxLikesMemo(k, ronda + 1, d1 - 1, 1, pateadores, likes);
         if(bailo > mejor) mejor = bailo;
     }

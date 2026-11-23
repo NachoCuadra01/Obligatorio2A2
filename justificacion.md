@@ -44,7 +44,18 @@
   En este ejercicio se crea un array de programación dinámica que guarda los resultados de todos los productos, pesos y cantidades posibles de cada categoría. Su tamaño es (N + 1) ⋅ (W + 1) ⋅ (L0 + 1) ⋅ (L1 + 1) ⋅ (L2 + 1) ⋅ (L3 + 1), por lo que el orden espacial queda en O(N ⋅ W ⋅ L0 ⋅ L1 ⋅ L2 ⋅ L3). Además, se crean tres arrays de largo N para guardar el peso, la satisfacción y la categoría de cada producto pero que no cambian el orden final.
 
 ## Ejercicio 9
-- Sin restricciones de órdenes. / Justificación: ...
+
+- **maxLikes — Orden temporal:** O(K²) pc, siendo K la cantidad de rondas.
+
+  **Justificación:** se utiliza programación dinámica con memorización, en la cual se resuelve el problema de forma recursiva con maxLikesMemo y se guarda en una tabla el resultado de cada estado ya calculado. Cada posición de memo[ronda][dif][prev] representa la máxima cantidad de likes que se pueden juntar desde la ronda actual hasta la última, siendo dif la ventaja actual del equipo A y prev si "Pato" bailó en el penal anterior o no (puede ser 0 o 1). Cabe destacar que la ventaja determina si se puede bailar sin que A pase a perder, y prev confirma si el baile da los likes completos o la mitad.
+
+  En cada ronda, primero patea A, por lo que la ventaja pasa a ser dif + pateadores[ronda]. Luego hay dos opciones: no bailar, que no suma likes y pasa a la ronda siguiente con la misma ventaja y prev = 0; o bailar, que solo es posible si esa ventaja es al menos 1 (ya que B convierte en ese caso). Se suma likes[ronda], o (likes[ronda] / 2) (redondeado hacia abajo) si "Pato" ya había bailado en el tiro anterior, y pasa a la ronda siguiente con la ventaja reducida en 1 y prev = 1. Finalmente, se toma el máximo de ambas opciones.
+
+  En la tanda de penales existen (K ⋅ (K+1) ⋅ 2) ~ K² estados; basados en el número de rondas, la diferencia y las prev (0/1). La memorización calcula una vez cada estado posible, y como cada cálculo revisa las opciones con operaciones constantes, el orden queda O(K²). Por otra parte, la creación de la tabla "memo" inicializa todos los posibles estados en -1 y también es O(K²), por lo que el orden temporal queda en O(K²) en el peor caso.
+
+- **maxLikes — Orden espacial:** O(K²)
+
+  Se crea una tabla de memorización memo[ronda][dif][prev] de la cual se usan K ⋅ (K + 1) ⋅ 2 posiciones, una por estado, lo que se simplifica en orden espacial O(K²). Además, se crean dos arrays de largo K con los resultados de cada pateador de A y los likes que genera cada tiro, pero ambos son O(K) y no alteran el orden final.
 
 ## Ejercicio 10
 - Sin restricciones de órdenes. / Justificación: ...
