@@ -83,7 +83,7 @@ int main(){
     int* sat = new int[n];
     int* cat = new int[n];
 
-    for (int i = 0; i <= n; i++){
+    for (int i = 0; i < n; i++){
         cin >> peso[i] >> sat[i] >> cat[i];
     }
 

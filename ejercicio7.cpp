@@ -29,8 +29,7 @@ long long cantRemontadasAux(int* puestos, int* auxiliar, int inicio, int final) 
     int derecha = medio + 1;
 
     for (int i = inicio; i <= final; i++) {
-        if (derecha > final ||
-            (izquierda <= medio && puestos[izquierda] <= puestos[derecha])) {
+        if (derecha > final || (izquierda <= medio && puestos[izquierda] <= puestos[derecha])) {
             auxiliar[i] = puestos[izquierda];
             izquierda++;
         } else {
@@ -50,8 +49,7 @@ long long cantRemontadas(int* puestos, int largo) {
     int* auxiliar = new int[largo];
 
     long long cant = cantRemontadasAux(puestos, auxiliar, 0, largo - 1);
-
-    delete[] auxiliar;
+    
     return cant;
 }
 
