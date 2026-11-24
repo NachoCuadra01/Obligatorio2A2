@@ -26,4 +26,5 @@
 - Sin restricciones de órdenes. / Justificación: ...
 
 ## Ejercicio 10
-- Sin restricciones de órdenes. / Justificación: ...
+
+- A pesar de que este ejercicio no tenía restricciones de órdenes, decidimos realizar una justificación del código por su extensión.
