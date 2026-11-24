@@ -58,4 +58,24 @@
   Se crea una tabla de memorización memo[ronda][dif][prev] de la cual se usan K ⋅ (K + 1) ⋅ 2 posiciones, una por estado, lo que se simplifica en orden espacial O(K²). Además, se crean dos arrays de largo K con los resultados de cada pateador de A y los likes que genera cada tiro, pero ambos son O(K) y no alteran el orden final.
 
 ## Ejercicio 10
-- Sin restricciones de órdenes. / Justificación: ...
+
+- A pesar de que este ejercicio no tenía restricciones de órdenes, decidimos realizar una justificación del código por su extensión.
+
+Se implementó el método de optimización de backtracking para resolver este ejercicio. En primer lugar, como ya fue declarado, se utilizó la inteligencia artificial para ver qué parámetros necesitábamos pasarle a la función; por lo que obtuvimos, entre los que ya teníamos y los nuevos recibidos, los siguientes: 
+  - string* palabras: un array que contiene a las palabras que se reciben y la palabra final como última posición
+  - long long* sumados: un array del largo de la cantidad de palabras, que va a contener al valor numérico más óptimo de cada palabra. Además, su última posición es la sumatoria. 
+  - long long mejorRes: el valor numérico final de la suma más óptima 
+  - int cant: la cantidad de palabras recibidas más 1
+  - bool* visitados: de largo 10 (del 0 al 9), va a servir para marcar como true cuando una letra tenga un valor asignado (ej: si a "B" le asignamos 3 como valor, visitados[3] = true, ninguna otra letra va a ser 3)
+  - int* valor: de largo 26 (como el alfabeto), va a tener el valor final de las letras requeridas (ej: valor[1] = 3)
+  - bool* noCero: también de largo 26, va a tener true a los que no pueden ser 0 por la letra del ejercicio
+  - int columna: representa a la columna de cada sumando (ej: "SEND" tiene 4)
+  - int fila: representa a la fila de cada sumando y la palabra final (ej: en "SEND", "MORE" y "MONEY" hay 3)
+  - int suma: representa al valor que va teniendo la suma de las diferentes letras 
+
+Como toda llamada recursiva, primero se trabaja con el caso base. Cuando estamos en la última columna, si la suma viene con un valor diferente de 0 significa que ya fue insertado sea por medio del dígito en sí o por el acarreo de las columnas previas, por lo que retorna enseguida. Sino, se crea un array de "numeros" el cual actúa como un "sumados" provisorio para ese caso. Luego se obtiene al valor de la última posición (la sumatoria), y se lo compara con mejorRes: si es mayor a mejorRes, se olvida. Si son iguales, se evalúa letra por letra; el que tenga a la menor letra primero es la mejor solución, y si resultado es estrictamente menor es mejor solución. En el caso de que "resultado" sea mejor solución, se reemplazan los valores de sumados por los de numeros, y mejorRes pasa a ser ese nuevo resultado.
+
+Fuera del caso base, nos ponemos a revisar si estamos ante la palabra final: si no es el caso, buscamos la posición de la letra con la que queremos trabajar. Si la posición es negativa, significa que terminamos con esa palabra, por lo que se llama al backtracking pero con la fila siguiente (la próxima palabra pero en la misma columna). Sino, la letra pasa a ser (palabras[fila][pos] - 'A'); que representa a la letra que vamos a usar basados en las posiciones del abecedario. Si en el array de valor, esta posición es distinta de -1, significa que ya tiene un valor asignado, por lo que se llama a la recursiva, pero a la siguiente palabra (manteniendo la columna) y con la suma agregada al valor de esta letra. Si no es el caso, se hace la esencia del backtracking: hacer un movimiento, llamar a la recursiva para ese caso aplicado, y deshacerlo. En este caso, a la letra se le asigna todos los valores aún no marcados (y 0 si se puede), se llama a la recursiva con la siguiente palabra (también manteniendo la columna) y con suma siendo igual más este nuevo valor, y luego se deshace la acción. 
+
+En el caso de que se trate de la palabra final, realizamos el mismo proceso para encontrar la letra correspondiente; asignamos como dígito a lo que ya venía como suma anterior (mod 10 porque puede tener acarreo), y verificamos si lleva acarreo para la siguiente columna. Luego, si el valor de la letra coincide con el dígito, significa que ya quedó guardado este valor para esa letra, por lo que se llama a la función recursiva con la siguiente columna desde el inicio de las filas y con el acarreo correspondiente. En el caso que sea un valor distinto, significa que una letra tiene 2 valores diferentes, por lo que esa solución no sirve. 
+Luego está el caso de que el valor de esa letra sea -1, lo que da a entender que aún no se le asignó un valor a la letra. Entonces, si el dígito no está marcado como usado y es distinto de 0 (o si puede serlo), se vuelve a hacer otro backtracking: se le asigna ese dígito al valor de la letra y se marca al dígito como usado. Luego, se llama a la recursiva para la columna siguiente desde el primer sumando (fila 0) y con el acarreo que deba. Por último, se deshace la acción. 
