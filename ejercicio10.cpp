@@ -128,7 +128,7 @@ void acertijos(string* palabras, int cant){
 
     int largoRes = palabras[cant - 1].length();
 
-    if(largoRes == mayorLargo){
+    if(largoRes >= mayorLargo && largoRes <= mayorLargo + 1){
         acertijos_bt(palabras, sumados, mejorRes, cant, visitados, valor, noCero, 0, 0, 0);
     }
 
